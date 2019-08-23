@@ -1,6 +1,3 @@
-/* Project 4 - OOP Game App
- * Phrase.js */
-
 //declaring Phrase class
 class Phrase {
     //phrase: the phrase that the Phrase object is representing. 
