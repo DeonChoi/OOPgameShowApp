@@ -105,6 +105,7 @@ class Game {
     //and then directs the game based on a correct or incorrect guess.
     handleInteraction(button) {
         const clickedLetter = $(button).text();
+
         if (this.activePhrase.checkLetter(clickedLetter) === true) {
             $(button).prop('disabled', true).addClass('chosen');
             this.activePhrase.showMatchedLetter(clickedLetter);

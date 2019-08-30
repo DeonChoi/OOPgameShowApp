@@ -11,14 +11,21 @@ $('#btn__reset').on('click', function() {
 
 //adding event listeners to each of the on screen keyboard buttons
 $('.key').on('click', function(e) {
+    console.log(e.target.innerHTML);
     game.handleInteraction(e.target);
 });
 
 //adding event listeners for physical keyboard, used to guess letters
 //only takes values a-z, keycodes of 65-90
 $(window).keydown(function(e) {
-    //console.log(e.key, e.code, e.which, typeof(e.which));
+    let clickedButton = null;
+    $('.key').each(function() {
+        if ($(this).text() === e.key) {
+            clickedButton = $(this);
+        }
+    })
+    console.log(e.key, e.code, e.which, typeof(e.which));
     if (e.which > 64 && e.which < 91) {
-        game.handleKeyboardInteraction(e.key);
+        game.handleInteraction(clickedButton);
     }
 });
