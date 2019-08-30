@@ -11,7 +11,8 @@ $('#btn__reset').on('click', function() {
 
 //adding event listeners to each of the on screen keyboard buttons
 $('.key').on('click', function(e) {
-    console.log(e.target.innerHTML);
+    //console.log(e.target)
+    //console.log(e.target.innerHTML);
     game.handleInteraction(e.target);
 });
 
@@ -20,11 +21,12 @@ $('.key').on('click', function(e) {
 $(window).keydown(function(e) {
     let clickedButton = null;
     $('.key').each(function() {
-        if ($(this).text() === e.key) {
-            clickedButton = $(this);
-        }
-    })
-    console.log(e.key, e.code, e.which, typeof(e.which));
+            if ($(this).text() === e.key) {
+                clickedButton = $(this)[0];
+            }
+        })
+        //console.log(clickedButton)
+        //console.log(e.key, e.code, e.which, typeof(e.which));
     if (e.which > 64 && e.which < 91) {
         game.handleInteraction(clickedButton);
     }

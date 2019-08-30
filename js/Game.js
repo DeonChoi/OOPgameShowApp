@@ -26,8 +26,12 @@ class Game {
     //Begins game by selecting a random phrase and displaying it to the user
     startGame() {
         $('#overlay').hide();
+        $('#phrase ul li').remove();
+        $('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+        $('.tries img').remove();
+        $('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
     }
 
     //Selects random phrase from phrases property
@@ -47,7 +51,6 @@ class Game {
             }
         });
         if (count === this.activePhrase.phrase.replace(/\s/g, "").length) {
-            //this.gameOver(true);
             return true;
         } else {
             return false;
@@ -84,19 +87,21 @@ class Game {
         if (gameWon === false) {
             $('h1#game-over-message').text('Sorry, better luck next time!');
             $('#overlay').removeClass('start win lose').addClass('lose');
+            $('.key').prop('disabled', true);
 
-            $('#phrase ul li').remove();
-            $('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
-            $('.tries img').remove();
-            $('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
+            // $('#phrase ul li').remove();
+            //$('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
+            //$('.tries img').remove();
+            //$('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
         } else {
             $('h1#game-over-message').text('Great job!');
             $('#overlay').removeClass('start win lose').addClass('win');
+            $('.key').prop('disabled', true);
 
-            $('#phrase ul li').remove();
-            $('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
-            $('.tries img').remove();
-            $('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
+            //$('#phrase ul li').remove();
+            //$('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
+            //$('.tries img').remove();
+            //$('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
         }
     }
 
@@ -104,8 +109,11 @@ class Game {
     //It checks to see if the button clicked by the player matches a letter in the phrase
     //and then directs the game based on a correct or incorrect guess.
     handleInteraction(button) {
+        if ($(button).attr('disabled')) {
+            return;
+        }
         const clickedLetter = $(button).text();
-
+        //console.log(clickedLetter)
         if (this.activePhrase.checkLetter(clickedLetter) === true) {
             $(button).prop('disabled', true).addClass('chosen');
             this.activePhrase.showMatchedLetter(clickedLetter);
