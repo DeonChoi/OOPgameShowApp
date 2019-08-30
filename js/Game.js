@@ -120,25 +120,25 @@ class Game {
     }
 
     //similar to handleInteraction() above, except this method is strictly for use of physical keyboard
-    handleKeyboardInteraction(letter) {
-        const clickedLetter = letter;
-        let clickedButton = null;
+    // handleKeyboardInteraction(letter) {
+    //     const clickedLetter = letter;
+    //     let clickedButton = null;
 
-        $('.key').each(function() {
-            if ($(this).text() === clickedLetter) {
-                clickedButton = $(this);
-            }
-        })
+    //     $('.key').each(function() {
+    //         if ($(this).text() === clickedLetter) {
+    //             clickedButton = $(this);
+    //         }
+    //     })
 
-        if (this.activePhrase.checkLetter(clickedLetter) === true) {
-            $(clickedButton).prop('disabled', true).addClass('chosen');
-            this.activePhrase.showMatchedLetter(clickedLetter);
-            if (this.checkForWin() === true) {
-                this.gameOver(true);
-            }
-        } else {
-            $(clickedButton).prop('disabled', true).addClass('wrong');
-            this.removeLife();
-        }
-    }
+    //     if (this.activePhrase.checkLetter(clickedLetter) === true) {
+    //         $(clickedButton).prop('disabled', true).addClass('chosen');
+    //         this.activePhrase.showMatchedLetter(clickedLetter);
+    //         if (this.checkForWin() === true) {
+    //             this.gameOver(true);
+    //         }
+    //     } else {
+    //         $(clickedButton).prop('disabled', true).addClass('wrong');
+    //         this.removeLife();
+    //     }
+    // }
 }
