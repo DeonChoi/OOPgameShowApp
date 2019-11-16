@@ -41,8 +41,7 @@ class Game {
         return randomPhrase;
     }
 
-    //This method checks to see if the player has revealed
-    //all of the letters in the active phrase.
+    //checks to see if the player has revealed all of the letters in the active phrase.
     checkForWin() {
         let count = 0;
         $('ul li').each(function() {
@@ -58,7 +57,7 @@ class Game {
     }
 
     /*
-    This method removes a life from the scoreboard, by replacing oneof the `liveHeart.png` 
+    Removes a life from the scoreboard, by replacing one of the `liveHeart.png` 
     images with a `lostHeart.png` image (found in the `images` folder) and 
     increments the `missed` property. If the player has five missed guesses 
     (i.e they're out of lives), then end the game by calling the `gameOver()` method.
@@ -77,7 +76,7 @@ class Game {
     }
 
     /*
-    This method displays the original start screen overlay, and
+    Displays the original start screen overlay, and
     depending on the outcome of the game, updates the overlay `h1` element with a
     friendly win or loss message, and replaces the overlay’s `start` CSS class with
     either the `win` or `lose` CSS class.
@@ -88,32 +87,20 @@ class Game {
             $('h1#game-over-message').text('Sorry, better luck next time!');
             $('#overlay').removeClass('start win lose').addClass('lose');
             $('.key').prop('disabled', true);
-
-            // $('#phrase ul li').remove();
-            //$('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
-            //$('.tries img').remove();
-            //$('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
         } else {
             $('h1#game-over-message').text('Great job!');
             $('#overlay').removeClass('start win lose').addClass('win');
             $('.key').prop('disabled', true);
-
-            //$('#phrase ul li').remove();
-            //$('.key').prop('disabled', false).addClass('key').removeClass('chosen wrong');
-            //$('.tries img').remove();
-            //$('.tries').append('<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">');
         }
     }
 
-    //method controls most of the game logic. 
-    //It checks to see if the button clicked by the player matches a letter in the phrase
-    //and then directs the game based on a correct or incorrect guess.
+    // checks to see if the button clicked by the player matches a letter in the phrase
+    // and then directs the game based on a correct or incorrect guess.
     handleInteraction(button) {
         if ($(button).attr('disabled')) {
             return;
         }
         const clickedLetter = $(button).text();
-        //console.log(clickedLetter)
         if (this.activePhrase.checkLetter(clickedLetter) === true) {
             $(button).prop('disabled', true).addClass('chosen');
             this.activePhrase.showMatchedLetter(clickedLetter);
@@ -126,27 +113,4 @@ class Game {
         }
 
     }
-
-    //similar to handleInteraction() above, except this method is strictly for use of physical keyboard
-    // handleKeyboardInteraction(letter) {
-    //     const clickedLetter = letter;
-    //     let clickedButton = null;
-
-    //     $('.key').each(function() {
-    //         if ($(this).text() === clickedLetter) {
-    //             clickedButton = $(this);
-    //         }
-    //     })
-
-    //     if (this.activePhrase.checkLetter(clickedLetter) === true) {
-    //         $(clickedButton).prop('disabled', true).addClass('chosen');
-    //         this.activePhrase.showMatchedLetter(clickedLetter);
-    //         if (this.checkForWin() === true) {
-    //             this.gameOver(true);
-    //         }
-    //     } else {
-    //         $(clickedButton).prop('disabled', true).addClass('wrong');
-    //         this.removeLife();
-    //     }
-    // }
 }

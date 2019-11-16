@@ -1,5 +1,3 @@
-//aiming for "Exceeds Expecations" but will accept a "Meets Expectations" grade
-
 //initalizing game object
 let game = null;
 
@@ -9,15 +7,12 @@ $('#btn__reset').on('click', function() {
     game.startGame();
 });
 
-//adding event listeners to each of the on screen keyboard buttons
+//event listeners to each of the on screen keyboard buttons
 $('.key').on('click', function(e) {
-    //console.log(e.target)
-    //console.log(e.target.innerHTML);
     game.handleInteraction(e.target);
 });
 
-//adding event listeners for physical keyboard, used to guess letters
-//only takes values a-z, keycodes of 65-90
+//event listeners for physical keyboard, used to guess letters
 $(window).keydown(function(e) {
     let clickedButton = null;
     $('.key').each(function() {
@@ -25,8 +20,6 @@ $(window).keydown(function(e) {
                 clickedButton = $(this)[0];
             }
         })
-        //console.log(clickedButton)
-        //console.log(e.key, e.code, e.which, typeof(e.which));
     if (e.which > 64 && e.which < 91) {
         game.handleInteraction(clickedButton);
     }
